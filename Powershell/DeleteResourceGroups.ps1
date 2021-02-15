@@ -1,5 +1,5 @@
 #Use a filter to select resource groups by substring
-$filter = 'P*'
+$filter = 'SQL'
  
 #Find Resource Groups by Filter -> Verify Selection
 Get-AzResourceGroup | Where-Object ResourceGroupName -match $filter | Select-Object ResourceGroupName
