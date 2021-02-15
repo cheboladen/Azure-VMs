@@ -1,3 +1,5 @@
+#SOURCE: https://www.yobyot.com/powershell/find-windows-azure-vm-images-using-powershell/2019/12/17/
+
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=$true)]
