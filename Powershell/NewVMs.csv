@@ -1,0 +1,3 @@
+Location,ResourceGroupName,TimeZone,AutomationAccount,StorageSKU,SubnetName,VNetAddressPrefix,VNetSubnetAddressPrefix,DestinationPortRange,TCPIPAllocationMethod,VMName,VMSize,PublisherName,OfferName,SKU,Version
+eastus,tjtsql,Romance Standard Time,automate,Premium_LRS,Default,10.0.0.0/16,10.0.0.0/24,"3389,1433",Dynamic,SQLI,Standard_B1s,MicrosoftSQLServer,SQL2017-WS2016,SQLDEV,latest
+eastus,tjtsql,Romance Standard Time,automate,Premium_LRS,Default,10.0.0.0/16,10.0.0.0/24,"3389,1433",Dynamic,SQLII,Standard_B1s,MicrosoftSQLServer,SQL2017-WS2016,SQLDEV,latest

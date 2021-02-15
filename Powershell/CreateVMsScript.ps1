@@ -11,9 +11,10 @@ Connect-AzAccount -Credential $AzCredential
 
 ## Global
 $Location = "eastus"
-$ResourceGroupName = "mama"
+$ResourceGroupName = "tost"
 $TimeZone = ([System.TimeZoneInfo]::Local).Id
 $AutomationAccount = "automate"
+$RunbookName = "apagate"
 
 ## Storage
 $StorageName = $ResourceGroupName + "storg"
@@ -80,5 +81,14 @@ New-AzSqlVM -ResourceGroupName $ResourceGroupName -Name $VMName -Location $Locat
 # Create Azure Automation Account
 New-AzAutomationAccount -Name $AutomationAccount -Location $Location -ResourceGroupName $ResourceGroupName
 
+# Create an Automation runbook.
+New-AzAutomationRunbook -AutomationAccountName $AutomationAccount -Name $RunbookName -Type PowerShell -ResourceGroupName $ResourceGroupName
+
+# Add VM to Apagado script
+Stop-AzVM -ResourceGroupName $ResourceGroupName -Name $VMName | Out-File ".\Apagado.ps1" -Append
+
+# Import an Automation runbook.
+Import-AzAutomationRunbook -AutomationAccountName $AutomationAccount -Name $RunbookName -Path ".\Apagado.ps1" -Type PowerShell -ResourceGroupName $ResourceGroupName -Force
+  
 # Create Shutdown Schedule
-New-AzAutomationSchedule -AutomationAccountName $AutomationAccount -Name "Apagar" -StartTime "18:00" -OneTime -ResourceGroupName $ResourceGroupName -TimeZone $TimeZone
+New-AzAutomationSchedule -AutomationAccountName $AutomationAccount -Name "$($RunbookName)sched" -StartTime "18:00" -DayInterval 1 -ResourceGroupName $ResourceGroupName -TimeZone $TimeZone
